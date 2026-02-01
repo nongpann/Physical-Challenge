@@ -1,0 +1,75 @@
+using UnityEngine;
+
+public class Projectile : MonoBehaviour
+{
+    private Rigidbody2D rb;
+    private bool fired = false;
+    private int score = 0;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0f;
+    }
+
+    private void FixedUpdate()
+    {
+        if (fired && rb.linearVelocity.magnitude > 0.1f)
+        {
+            float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+    }
+
+    public void Shoot(float power)
+    {
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.gravityScale = 1f;
+        rb.AddForce(transform.right * power, ForceMode2D.Impulse);
+        fired = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        fired = false;
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        transform.position += transform.up * 0.15f;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Multiplier1"))
+        {
+            score *= 1;
+        }
+        else if (other.CompareTag("Multiplier2"))
+        {
+            score *= 2;
+        }
+        else if (other.CompareTag("Multiplier3"))
+        {
+            score *= 3;
+        }
+        else if (other.CompareTag("Multiplier4"))
+        {
+            score *= 4;
+        }
+        else if (other.CompareTag("Multiplier5"))
+        {
+            score *= 5;
+        }
+        else
+        {
+            Destroy(other.gameObject);
+            score++;
+        }
+            
+    }
+
+    public int Getscore()
+    {
+        return score;
+    }
+}
