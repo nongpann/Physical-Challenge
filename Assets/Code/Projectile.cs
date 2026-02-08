@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Projectile : MonoBehaviour
 {
     private Rigidbody2D rb;
     private bool fired = false;
     private int score = 0;
+    [HideInInspector] public bool isMultiplied = false;
 
     private void Start()
     {
@@ -18,6 +20,11 @@ public class Projectile : MonoBehaviour
         {
             float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+
+        if (transform.position.y <= -5.0f)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -40,25 +47,30 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Multiplier1"))
+        if (other.CompareTag("Multiplier1") && !isMultiplied)
         {
             score *= 1;
+            isMultiplied = true;
         }
-        else if (other.CompareTag("Multiplier2"))
+        else if (other.CompareTag("Multiplier2") && !isMultiplied)
         {
             score *= 2;
+            isMultiplied = true;
         }
-        else if (other.CompareTag("Multiplier3"))
+        else if (other.CompareTag("Multiplier3") && !isMultiplied)
         {
             score *= 3;
+            isMultiplied = true;
         }
-        else if (other.CompareTag("Multiplier4"))
+        else if (other.CompareTag("Multiplier4") && !isMultiplied)
         {
             score *= 4;
+            isMultiplied = true;
         }
-        else if (other.CompareTag("Multiplier5"))
+        else if (other.CompareTag("Multiplier5") && !isMultiplied)
         {
             score *= 5;
+            isMultiplied = true;
         }
         else
         {

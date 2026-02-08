@@ -8,6 +8,7 @@ public class Thowing : MonoBehaviour
     [SerializeField] private float rotationSpeed = 1f;
     [SerializeField] private playerStateMachine playerStateMachine;
     private float currentAngle = 0f;
+    private bool isThrowed = false;
 
     private void Start()
     {
@@ -19,20 +20,25 @@ public class Thowing : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (playerStateMachine.getState() == "Running")
         {
+            
+            float input = Input.GetAxisRaw("Horizontal");
+
+            currentAngle -= input * rotationSpeed * Time.deltaTime;
+
+            currentAngle = Mathf.Clamp(currentAngle, 0f, 45f);
+
+            transform.rotation = Quaternion.Euler(0, 0, currentAngle);
+        }
+
+        if (playerStateMachine.getState() == "SeeJavalin" && !isThrowed)
+        {
+            isThrowed = true;
             javalin.GetComponent<Projectile>().Shoot(playerStateMachine.power);
             javalin.transform.parent = null;
         }
-
-        float input = Input.GetAxisRaw("Horizontal");
-
-        currentAngle -= input * rotationSpeed * Time.deltaTime;
-
-        currentAngle = Mathf.Clamp(currentAngle, -45f, 45f);
-
-        transform.rotation = Quaternion.Euler(0, 0, currentAngle);
-
+        
     }
 
 }

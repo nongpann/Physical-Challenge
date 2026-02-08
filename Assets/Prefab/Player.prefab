@@ -155,10 +155,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a25c3a5880af64bb3b1648e600d6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerStateMachine
-  seeJavalinState: {fileID: 0}
   power: 0
   movementPower: 10
   friction: 0.95
+  followJavalinCamera: {fileID: 0}
+  line: {fileID: 0}
+  stagePos: {fileID: 0}
+  stagePrefab:
+  - {fileID: 5189750149557242317, guid: 66460e545aa4e7740b1a9ef51a8ffd63, type: 3}
+  - {fileID: 3530120332599032047, guid: 31b9f6609948c224aa42fa4be93640e5, type: 3}
+  - {fileID: 3096199420331649440, guid: 08236b8a48f3d77499174334affdc39a, type: 3}
 --- !u!50 &6016642081983860617
 Rigidbody2D:
   serializedVersion: 5

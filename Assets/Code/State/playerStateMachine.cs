@@ -15,12 +15,17 @@ public class playerStateMachine : StateMachine
     [HideInInspector]
     public ResetScene ResetSceneState;
     [HideInInspector]
+    public SeeStage seeStageState;
+    [HideInInspector]
     public float power = 0;
 
     public float movementPower = 10f;
     public float friction = 0.95f;
     public GameObject followJavalinCamera;
+    public GameObject stageCamera;
     public GameObject line;
+    public stageManager stageManager;
+    public GameObject[] textTutorial;
     
 
     private void Awake()
@@ -29,6 +34,7 @@ public class playerStateMachine : StateMachine
         RunningState = new Running(this);
         SeeJavalinState = new SeeJavalin(this);
         ResetSceneState = new ResetScene(this);
+        seeStageState = new SeeStage(this);
     }
 
     protected override BaseState GetInitialState()

@@ -11,6 +11,8 @@ public class Running : BaseState
     
     private float currentLeftVelocity = 0f;
     private float lastSpinSpeed = 0f;
+
+    private SpriteRenderer colorPlayer;
     public Running(playerStateMachine stateMachine) : base("Running", stateMachine)
     {
         sm = (playerStateMachine)stateMachine;
@@ -21,7 +23,12 @@ public class Running : BaseState
     {
         base.Enter();
         rb.gravityScale = 0f;
-        
+        for (int i = 0; i < sm.textTutorial.Length; i++)
+        {
+            sm.textTutorial[i].gameObject.SetActive(false);
+        }
+        sm.textTutorial[1].gameObject.SetActive(true);
+        colorPlayer = sm.GetComponentInChildren<SpriteRenderer>();
     }
 
     public override void UpdateLogic()
@@ -34,7 +41,7 @@ public class Running : BaseState
             stateMachine.ChangeState(((playerStateMachine)stateMachine).SeeJavalinState);
         }
 
-        if (Input.GetKeyDown("r") || sm.transform.position.x >= sm.line.transform.position.x)
+        if (Input.GetKeyDown("r") || sm.transform.position.x >= 10.0f)
         {
             stateMachine.ChangeState(((playerStateMachine)stateMachine).ResetSceneState);
         }
@@ -46,9 +53,9 @@ public class Running : BaseState
 
         float lastRotation = totalRotation;
 
-        Vector2 center = new Vector2(Screen.width / 2, Screen.height / 2);
-        Vector2 mousePos = Input.mousePosition;
-        Vector2 direction = mousePos - center;
+        Vector2 mouseViewportPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        Vector2 center = new Vector2(0.5f, 0.5f);
+        Vector2 direction = mouseViewportPos - center;
 
         float currentAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float deltaAngle = Mathf.DeltaAngle(lastAngle, currentAngle);
@@ -56,33 +63,64 @@ public class Running : BaseState
         lastAngle = currentAngle;
 
         float distance = direction.magnitude;
-
-        float distanceMultiplier = Mathf.Clamp01(distance / 200f);
+        float distanceMultiplier = Mathf.Clamp01(distance / 0.25f);
 
         float spinSpeed = Mathf.Abs(deltaAngle);
 
         if (spinSpeed > 0)
         {
             currentLeftVelocity += spinSpeed * distanceMultiplier * sm.movementPower * Time.deltaTime;
-            sm.power += (spinSpeed * Time.deltaTime) * 2;
+            sm.power += (spinSpeed * Time.deltaTime) * 3.5f;
         }
-        else
-        {
-            sm.power = 0;
-        }
+        //else
+        //{
+        //    sm.power = 0;
+        //}
 
-        rb.linearVelocity = new Vector2(currentLeftVelocity, rb.linearVelocity.y);
+        
 
         if (spinSpeed < lastSpinSpeed / 2f)
         {
             currentLeftVelocity *= sm.friction;
             if (sm.power > 0)
             {
-                sm.power -= 1 * Time.deltaTime;
+                sm.power -= 1.5f * Time.deltaTime;
             }
 
         }
+        else if (spinSpeed <= 0)
+        {
+            currentLeftVelocity *= sm.friction;
+            if (sm.power > 0)
+            {
+                sm.power -= 20.0f * Time.deltaTime;
+            }
+        }
+
         lastSpinSpeed = spinSpeed;
+        rb.linearVelocity = new Vector2(currentLeftVelocity, rb.linearVelocity.y);
+
+        if (sm.power > 40)
+        {
+            colorPlayer.color = Color.red;
+        }
+        else if (sm.power > 30)
+        {
+            colorPlayer.color = Color.orange;
+        }
+        else if (sm.power > 20)
+        {
+            colorPlayer.color = Color.yellow;
+        }
+        else if (sm.power > 10)
+        {
+            colorPlayer.color = Color.lightYellow;
+        }
+        else if (sm.power < 10)
+        {
+            colorPlayer.color = Color.white;
+        }
+        
         Debug.Log(sm.power);
 
     }

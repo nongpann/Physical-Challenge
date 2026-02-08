@@ -13,6 +13,12 @@ public class Idle : BaseState
     public override void Enter()
     {
         base.Enter();
+        sm.stageManager.spawnStage();
+        for (int i = 0; i < sm.textTutorial.Length; i++)
+        {
+            sm.textTutorial[i].gameObject.SetActive(false);
+        }
+        sm.textTutorial[0].gameObject.SetActive(true);
     }
 
     public override void UpdateLogic()
@@ -26,6 +32,10 @@ public class Idle : BaseState
         if (Input.GetKeyDown("r"))
         {
             stateMachine.ChangeState(((playerStateMachine)stateMachine).ResetSceneState);
+        }
+
+        if (Input.GetKeyDown("c")) {
+            stateMachine.ChangeState(((playerStateMachine)stateMachine).seeStageState);
         }
     }
 
