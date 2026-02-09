@@ -160,6 +160,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &37738958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7805208501303587754, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
+  m_PrefabInstance: {fileID: 508705602}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &61047399
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +432,7 @@ RectTransform:
   m_Children:
   - {fileID: 860667479}
   - {fileID: 575475547}
+  - {fileID: 1645942668}
   - {fileID: 2084696515}
   - {fileID: 1840499225}
   m_Father: {fileID: 0}
@@ -642,12 +648,20 @@ PrefabInstance:
       objectReference: {fileID: 1582695000}
     - target: {fileID: 1414520890181583859, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
       propertyPath: friction
-      value: 0.99
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 1414520890181583859, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
       propertyPath: stagePos
       value: 
       objectReference: {fileID: 433598086}
+    - target: {fileID: 1414520890181583859, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
+      propertyPath: triangle
+      value: 
+      objectReference: {fileID: 37738958}
+    - target: {fileID: 1414520890181583859, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
+      propertyPath: powerColor
+      value: 
+      objectReference: {fileID: 1645942669}
     - target: {fileID: 1414520890181583859, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
       propertyPath: stageCamera
       value: 
@@ -658,7 +672,7 @@ PrefabInstance:
       objectReference: {fileID: 433598088}
     - target: {fileID: 1414520890181583859, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
       propertyPath: movementPower
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1414520890181583859, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
       propertyPath: rotationSpeed
@@ -696,6 +710,10 @@ PrefabInstance:
       propertyPath: 'textTutorial.Array.data[3]'
       value: 
       objectReference: {fileID: 33951617}
+    - target: {fileID: 1414520890181583859, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
+      propertyPath: 'textTutorial.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1645942667}
     - target: {fileID: 1771985460549136334, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
       propertyPath: m_BodyType
       value: 1
@@ -751,6 +769,10 @@ PrefabInstance:
     - target: {fileID: 6016642081983860617, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
       propertyPath: m_GravityScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805208501303587754, guid: f8010a522b7235945a788e0d2b3779ea, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1349,12 +1371,12 @@ MonoBehaviour:
   m_text: 'Spin your mouse for gain power to throw javalin.
 
     If stop spin mouse
-    you will lose all your power to throw javalin.
+    you will lose your power.
 
-    Click right mouse | To throw
-    javalin.
+    Click right mouse | To throw javalin.
 
-    Press A / D | To adjust rotation.
+    Press
+    A / D | To adjust rotation.
 
 '
   m_isRightToLeft: 0
@@ -2544,6 +2566,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640412007}
+  m_CullTransparentMesh: 1
+--- !u!1 &1645942667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1645942668}
+  - component: {fileID: 1645942670}
+  - component: {fileID: 1645942669}
+  m_Layer: 5
+  m_Name: Power bar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1645942668
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645942667}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 263287791}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 492, y: -467.74042}
+  m_SizeDelta: {x: 766.5487, y: 36.5192}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1645942669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645942667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1645942670
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645942667}
   m_CullTransparentMesh: 1
 --- !u!1 &1840499224
 GameObject:

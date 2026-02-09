@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class playerStateMachine : StateMachine
@@ -26,6 +27,8 @@ public class playerStateMachine : StateMachine
     public GameObject line;
     public stageManager stageManager;
     public GameObject[] textTutorial;
+    public Image powerColor;
+    public GameObject triangle;
     
 
     private void Awake()

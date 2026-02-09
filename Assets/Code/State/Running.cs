@@ -70,13 +70,9 @@ public class Running : BaseState
         if (spinSpeed > 0)
         {
             currentLeftVelocity += spinSpeed * distanceMultiplier * sm.movementPower * Time.deltaTime;
-            sm.power += (spinSpeed * Time.deltaTime) * 3.5f;
+            sm.power += (spinSpeed * Time.deltaTime) * 5.0f;
+            sm.triangle.transform.Rotate(sm.triangle.transform.rotation.x, sm.triangle.transform.rotation.y, sm.triangle.transform.rotation.z + 20);
         }
-        //else
-        //{
-        //    sm.power = 0;
-        //}
-
         
 
         if (spinSpeed < lastSpinSpeed / 2f)
@@ -84,7 +80,7 @@ public class Running : BaseState
             currentLeftVelocity *= sm.friction;
             if (sm.power > 0)
             {
-                sm.power -= 1.5f * Time.deltaTime;
+                sm.power -= (sm.power * Time.deltaTime) * 2.0f;
             }
 
         }
@@ -93,35 +89,16 @@ public class Running : BaseState
             currentLeftVelocity *= sm.friction;
             if (sm.power > 0)
             {
-                sm.power -= 20.0f * Time.deltaTime;
+                sm.power -= (sm.power * Time.deltaTime) * 2.0f;
             }
         }
 
         lastSpinSpeed = spinSpeed;
         rb.linearVelocity = new Vector2(currentLeftVelocity, rb.linearVelocity.y);
 
-        if (sm.power > 40)
-        {
-            colorPlayer.color = Color.red;
-        }
-        else if (sm.power > 30)
-        {
-            colorPlayer.color = Color.orange;
-        }
-        else if (sm.power > 20)
-        {
-            colorPlayer.color = Color.yellow;
-        }
-        else if (sm.power > 10)
-        {
-            colorPlayer.color = Color.lightYellow;
-        }
-        else if (sm.power < 10)
-        {
-            colorPlayer.color = Color.white;
-        }
+        sm.powerColor.color = Color.Lerp(Color.white, Color.red, sm.power / 40.0f);
         
-        Debug.Log(sm.power);
+        //Debug.Log(sm.power);
 
     }
 
