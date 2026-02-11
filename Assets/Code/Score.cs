@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Score : MonoBehaviour
 {
     [HideInInspector] public static Score Instance { get; private set; }
+    [HideInInspector] public int round = 0;
 
     private TextMeshProUGUI scoreText;
     private TextMeshProUGUI roundText;
@@ -15,7 +16,7 @@ public class Score : MonoBehaviour
     private int showScore = 0;
     private int currScore = 0;
     private int oldScore = 0;
-    private int round = 0;
+    
 
     void Awake()
     {

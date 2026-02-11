@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1675680422514601157}
   - component: {fileID: 6213468480868189854}
-  - component: {fileID: 8083249729964891351}
+  - component: {fileID: 8560582080148578535}
   m_Layer: 0
   m_Name: Runing floor
-  m_TagString: Untagged
+  m_TagString: RunningFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!61 &8083249729964891351
+--- !u!61 &8560582080148578535
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,6 +135,6 @@ BoxCollider2D:
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_AutoTiling: 1
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0

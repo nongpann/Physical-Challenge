@@ -10,6 +10,7 @@ TagManager:
   - Multiplier3
   - Multiplier4
   - Multiplier5
+  - RunningFloor
   layers:
   - Default
   - TransparentFX

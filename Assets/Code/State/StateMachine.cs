@@ -43,11 +43,11 @@ public class StateMachine : MonoBehaviour
         return currentState.ToString();
     }
 
-    private void OnGUI()
-    {
-        GUILayout.BeginArea(new Rect(10f, 100f, 200f, 100f));
-        string content = currentState != null ? currentState.name : "(no current state)";
-        GUILayout.Label($"<color='black'><size=40>{content}</size></color>");
-        GUILayout.EndArea();
-    }
+    //private void OnGUI()
+    //{
+    //    GUILayout.BeginArea(new Rect(10f, 100f, 200f, 100f));
+    //    string content = currentState != null ? currentState.name : "(no current state)";
+    //    GUILayout.Label($"<color='black'><size=40>{content}</size></color>");
+    //    GUILayout.EndArea();
+    //}
 }

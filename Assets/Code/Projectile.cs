@@ -1,15 +1,21 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private GameObject textRO;
+    [SerializeField] private GameObject cameraStage;
+    private Score round;
     private Rigidbody2D rb;
     private bool fired = false;
     private int score = 0;
-    [HideInInspector] public bool isMultiplied = false;
+    public bool isMultiplied = false;
+    
 
     private void Start()
     {
+        round = GameObject.Find("Manager").GetComponent<Score>();
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
     }
@@ -24,7 +30,11 @@ public class Projectile : MonoBehaviour
 
         if (transform.position.y <= -5.0f)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            score *= 0;
+            textRO.SetActive(true);
+            cameraStage.SetActive(true);
+            isMultiplied = true;
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -70,6 +80,11 @@ public class Projectile : MonoBehaviour
         else if (other.CompareTag("Multiplier5") && !isMultiplied)
         {
             score *= 5;
+            isMultiplied = true;
+        }
+        else if (other.CompareTag("RunningFloor") && !isMultiplied)
+        {
+            score *= 0;
             isMultiplied = true;
         }
         else
