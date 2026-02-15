@@ -18,8 +18,12 @@ public class playerStateMachine : StateMachine
     [HideInInspector]
     public SeeStage seeStageState;
     [HideInInspector]
+    public DebugState debugState;
+    [HideInInspector]
     public float power = 0;
-
+    [HideInInspector]
+    public float currentLeftVelocity = 0f;
+    
     public float movementPower = 10f;
     public float friction = 0.95f;
     public GameObject followJavalinCamera;
@@ -27,9 +31,16 @@ public class playerStateMachine : StateMachine
     public GameObject line;
     public stageManager stageManager;
     public GameObject[] textTutorial;
-    public Image powerColor;
+    public Slider powerColor;
     public GameObject triangle;
-    
+    public Thowing javalin;
+    public AudioClip ThrowSound;
+    public AudioSource source;
+
+    public float debugPower;
+    public float debugAngle;
+
+
 
     private void Awake()
     {
@@ -38,11 +49,12 @@ public class playerStateMachine : StateMachine
         SeeJavalinState = new SeeJavalin(this);
         ResetSceneState = new ResetScene(this);
         seeStageState = new SeeStage(this);
+        debugState = new DebugState(this);
     }
 
     protected override BaseState GetInitialState()
     {
-        return idleState;
+        return debugState;
     }
 
     public void destroy(GameObject coin)

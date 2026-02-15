@@ -28,14 +28,14 @@ public class Projectile : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
 
-        if (transform.position.y <= -5.0f)
-        {
-            score *= 0;
-            textRO.SetActive(true);
-            cameraStage.SetActive(true);
-            isMultiplied = true;
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+        //if (transform.position.y <= -5.0f)
+        //{
+        //    score *= 0;
+        //    textRO.SetActive(true);
+        //    cameraStage.SetActive(true);
+        //    isMultiplied = true;
+        //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //}
     }
 
     public void Shoot(float power)
@@ -52,7 +52,7 @@ public class Projectile : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
         rb.bodyType = RigidbodyType2D.Kinematic;
-        transform.position += transform.up * 0.15f;
+        //transform.position += transform.up * 0.15f;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

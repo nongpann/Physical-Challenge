@@ -34,8 +34,13 @@ public class Idle : BaseState
             stateMachine.ChangeState(((playerStateMachine)stateMachine).ResetSceneState);
         }
 
-        if (Input.GetKeyDown("c")) {
-            stateMachine.ChangeState(((playerStateMachine)stateMachine).seeStageState);
+        //if (Input.GetKeyDown("c")) {
+        //    stateMachine.ChangeState(((playerStateMachine)stateMachine).seeStageState);
+        //}
+
+        if (Input.GetKeyDown("r"))
+        {
+            stateMachine.ChangeState(((playerStateMachine)stateMachine).debugState);
         }
     }
 
