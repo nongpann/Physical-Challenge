@@ -54,7 +54,7 @@ public class playerStateMachine : StateMachine
 
     protected override BaseState GetInitialState()
     {
-        return debugState;
+        return idleState;
     }
 
     public void destroy(GameObject coin)
