@@ -64,17 +64,27 @@ public class Running : BaseState
         base.UpdateAction();
 
         float lastRotation = totalRotation;
-        Vector2 mouseViewportPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
+        // Use a reference resolution for consistent behavior
+        const float referenceWidth = 1920f;
+
+        Vector2 mouseViewportPos = new Vector2(
+            Input.mousePosition.x / Screen.width,
+            Input.mousePosition.y / Screen.height
+        );
+
         Vector2 center = new Vector2(0.5f, 0.5f);
         Vector2 direction = mouseViewportPos - center;
 
-        // Calculate angle BEFORE applying aspect ratio correction
+        // Scale by resolution ratio
+        float resolutionScale = Screen.width / referenceWidth;
+        direction /= resolutionScale; // Normalize to reference resolution
+
         float currentAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float deltaAngle = Mathf.DeltaAngle(lastAngle, currentAngle);
         totalRotation += deltaAngle;
         lastAngle = currentAngle;
 
-        // Apply aspect ratio correction for distance calculation
         float aspectRatio = (float)Screen.width / Screen.height;
         direction.x *= aspectRatio;
         float distance = direction.magnitude;
